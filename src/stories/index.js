@@ -9,6 +9,7 @@ import Opening from '../components/Opening';
 import Loading from '../components/lib/Loading';
 import CatImages from '../components/CatImages';
 import AnswerButtons from '../components/AnswerButtons'
+import QuestionStatus from '../components/QuestionStatus';
 
 // import { Button, Welcome } from '@storybook/react/demo';
 
@@ -121,4 +122,15 @@ storiesOf('AnswerButtons', module)
       />
     )
   })
+
+storiesOf('QuestionStatus', module)
+  .add('normal', () => 
+    <QuestionStatus />
+  )
+  .add('success', () => 
+    <QuestionStatus resultMessage='The result is good' isSuccess={true} />
+  )
+  .add('wrong', () => 
+    <QuestionStatus resultMessage='The result is bad' isSuccess={false} />
+  )
 

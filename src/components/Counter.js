@@ -35,9 +35,9 @@ class Counter extends Component {
   render() {
     const {counter} = this.state;
     return (
-      <React.Fragment>
-        {Math.floor(counter / 100) / 10}
-      </React.Fragment>
+      <span>
+        {(counter / 1000).toFixed(1) }
+      </span>
     )
   }
 }

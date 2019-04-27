@@ -1,14 +1,32 @@
 import React, {Component} from 'react';
+import styled from 'styled-components'
 
 import {getImagesForBreed, AppError} from '../services/catApi';
 import Counter from './Counter';
-import Button from './lib/Button';
 import Loading from './lib/Loading';
 import CatImages from './CatImages';
 import AnswerButton from './AnswerButtons';
+import QuestionStatus from './QuestionStatus';
 
 const TIME_TO_ANSWER_MS = 5000;
 const ANSWER_TIMEOUT = -1;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+`
+
+const StatusContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const CounterContainer = styled.div`
+  display: flex;
+  align-items: center;
+`
 
 export default class Question extends Component {
   constructor(props) {
@@ -46,10 +64,10 @@ export default class Question extends Component {
     this.setState({
       answer: answerId,
       result: answerId === ANSWER_TIMEOUT
-        ? 'Timeout'
+        ? 'The time is out! Be faster.'
         : answerId === correctId
-          ? 'Correct'
-          : 'Wrong'
+          ? 'You your answer is correct!'
+          : 'Your answer is wrong!'
     })
     onAnswer(answerId===correctId)
   }
@@ -57,23 +75,29 @@ export default class Question extends Component {
     const {options, correctId} = this.props;
     const {images, isLoading, answer, result} = this.state;
 
+    const isAnswered = answer !== null;
+    const isCorrect = answer === correctId;
+
     if (isLoading) {
       return (<Loading title='Loading the question...'/>)
     }
     
     return (
-      <React.Fragment>
-        {
-          !answer && <div> 
-            Quess this cat\'s breed! 
-            You have {
-              <Counter 
-                timeMs={TIME_TO_ANSWER_MS} 
-                onFinished={() => this.answer(ANSWER_TIMEOUT)}
-              />
-            } secs.
-          </div>
-        }
+      <Container>
+        <StatusContainer>
+          <QuestionStatus message={result} isSuccess={isCorrect} />
+          <CounterContainer>
+          {
+            !isAnswered && [
+              'Seconds left:', 
+                <Counter
+                  timeMs={TIME_TO_ANSWER_MS} 
+                  onFinished={() => this.answer(ANSWER_TIMEOUT)}
+                />
+            ]
+          }
+          </CounterContainer>
+        </StatusContainer>
         <CatImages images={images} />
         <AnswerButton 
           onAnswer={(userAnswer) => this.answer(userAnswer)}
@@ -81,10 +105,7 @@ export default class Question extends Component {
           correctAnswer={correctId}
           userAnswer={answer}
         />
-        <div>
-          <span style={{color: answer === correctId ? 'green' : 'red'}}>{result}</span>
-        </div>
-      </React.Fragment>
+      </Container>
     )
   }
 }

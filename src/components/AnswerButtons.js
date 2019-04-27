@@ -8,7 +8,7 @@ const Container = styled.div``;
 
 function AnswerButtons({onAnswer, options, userAnswer, correctAnswer}) {
   const isAnswered = userAnswer !== null;
-  const isCorrect = userAnswer == correctAnswer
+  const isCorrect = userAnswer === correctAnswer
 
   return (
     <Container>
@@ -20,6 +20,7 @@ function AnswerButtons({onAnswer, options, userAnswer, correctAnswer}) {
           success={
             isAnswered && (breed.id === correctAnswer)
           }
+          key={breed.id}
         >
           {breed.name}
         </Button>
