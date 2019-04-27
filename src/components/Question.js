@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {getImagesForBreed, AppError} from '../services/catApi';
 import Counter from './Counter';
+import Button from './lib/Button';
 
 const TIME_TO_ANSWER_MS = 5000;
 const ANSWER_TIMEOUT = -1;
@@ -73,25 +74,16 @@ export default class Question extends Component {
         </div>
         <div>
           {options.map((breed) => (
-            <button 
+            <Button 
               onClick={() => this.answer(breed.id)}
               disabled={answer !== null}
-              style={{
-                color: answer === null
-                  ? null
-                  : answer === correctId
-                    ? answer === breed.id
-                      ? 'green'
-                      : null
-                    : breed.id === answer
-                      ? 'red'
-                      : breed.id === correctId
-                        ? 'green'
-                        : null
-              }}
+              error={answer !== null && answer !== correctId && answer === breed.id}
+              success={
+                answer !== null && (breed.id === correctId)
+              }
             >
               {breed.name}
-            </button>
+            </Button>
           ))}
         </div>
         <div>

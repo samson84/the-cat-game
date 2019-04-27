@@ -1,5 +1,5 @@
 import {breed} from '../utils/models';
- 
+
 const API_KEY = process.env.REACT_APP_CAT_API_KEY;
 const BASE_URL = 'https://api.thecatapi.com/v1'
 
@@ -43,7 +43,8 @@ function imageLoader(url) {
 
 export async function getAllBreeds() {
   const data = await request(`${BASE_URL}/breeds?limit=100`)
-  return data.payload.map(({ id, name }) => breed({ id, name }))
+  const processed = data.payload.map(({ id, name }) => breed({ id, name }))
+  return processed;
 }
 
 export async function getImagesForBreed(breedId) {
