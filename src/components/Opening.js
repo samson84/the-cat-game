@@ -29,7 +29,7 @@ export default function Opening({onStart}) {
       <div>
         <Intro>
           <p>
-            In this game, you will see 3 pictures of cats from the same breed.
+            In this game, you will see 3 pictures of cats of the same breed.
             Quess which breed is on the images. 
           </p> 
           <p>
