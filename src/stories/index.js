@@ -6,6 +6,7 @@ import { action } from '@storybook/addon-actions';
 import Button, {CloseButton} from '../components/lib/Button';
 import Alert from '../components/lib/Alert';
 import Opening from '../components/Opening';
+import Loading from '../components/lib/Loading';
 
 // import { Button, Welcome } from '@storybook/react/demo';
 
@@ -39,4 +40,9 @@ storiesOf('Alert', module)
 storiesOf('Opening', module)
   .add('normal', () => 
     <Opening />
+  )
+
+storiesOf('Loading', module)
+  .add('normal', () => 
+    <Loading />
   )

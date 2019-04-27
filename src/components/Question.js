@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {getImagesForBreed, AppError} from '../services/catApi';
 import Counter from './Counter';
 import Button from './lib/Button';
+import Loading from './lib/Loading';
 
 const TIME_TO_ANSWER_MS = 5000;
 const ANSWER_TIMEOUT = -1;
@@ -53,7 +54,7 @@ export default class Question extends Component {
     const {images, isLoading, answer, result} = this.state;
 
     if (isLoading) {
-      return (<span>Loading Question...</span>)
+      return (<Loading title='Loading the question...'/>)
     }
     
     return (

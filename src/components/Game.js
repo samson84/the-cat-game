@@ -9,6 +9,7 @@ import {getRandomElements, range, shuffle} from '../utils/random';
 import Question from './Question';
 import Button from './lib/Button';
 import Opening from './Opening';
+import Loading from './lib/Loading';
 
 const QUESTION_NUMBER = 5;
 
@@ -78,7 +79,7 @@ export default class Game extends Component {
     } = this.state;
 
     if (isLoading) {
-      return (<span>Loading...</span>)
+      return (<Loading />)
     }
 
     if (currentQuestion === null) {

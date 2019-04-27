@@ -23,9 +23,7 @@ const Intro = styled.div`
   font-size: 1.2em;
 `
 
-export default function Opening(props) {
-  const { onStart } = props;
-
+export default function Opening({onStart}) {
   return (
     <Container>
       <div>
