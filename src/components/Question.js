@@ -92,13 +92,13 @@ export default class Question extends Component {
             </span>            
           }
         </StatusContainer>
-        <CatImages images={images} />
         <AnswerButton 
-          onAnswer={(userAnswer) => this.answer(userAnswer)}
-          options={options}
-          correctAnswer={correctId}
-          userAnswer={answer}
-        />
+            onAnswer={(userAnswer) => this.answer(userAnswer)}
+            options={options}
+            correctAnswer={correctId}
+            userAnswer={answer}
+         />
+        <CatImages images={images} />
       </Container>
     )
   }

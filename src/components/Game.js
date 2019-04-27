@@ -125,8 +125,17 @@ export default class Game extends Component {
               >
                 Next Question
               </Button>
-
           }
+          {
+            isAnswered && isLastQuestion &&
+              <Button 
+                onClick={this.createGame}
+                primary
+              >
+                New Game
+              </Button>
+          }
+          {isAnswered && isLastQuestion && <span>The game finished.</span>}
         </StatusBar>
         <Centered>
           <Question 
