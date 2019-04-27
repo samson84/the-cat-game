@@ -10,10 +10,23 @@ import Question from './Question';
 import Button from './lib/Button';
 import Opening from './Opening';
 import Loading from './lib/Loading';
+import GameStatus from './GameStatus';
 
 const QUESTION_NUMBER = 5;
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;  
+`
+
+const Centered = styled.div`
+  margin: auto;
+`
+
+const StatusBar = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 `
 
 export default class Game extends Component {
@@ -79,13 +92,15 @@ export default class Game extends Component {
     } = this.state;
 
     if (isLoading) {
-      return (<Loading />)
+      return (<Loading title='Loading game...' />)
     }
 
     if (currentQuestion === null) {
       return (
         <Container>
-          <Opening onStart={this.createGame}/>
+          <Centered>
+            <Opening onStart={this.createGame}/>
+          </Centered>
         </Container>        
       )
     }
@@ -96,25 +111,32 @@ export default class Game extends Component {
 
     return ( 
       <Container>
-        <div>
-          Questions: {currentQuestion + 1}/{QUESTION_NUMBER}
-          Correct: {answers.reduce((prev, current) => current ? prev + 1 :prev, 0)}          
-        </div>
-        <div>{isLastQuestion && isAnswered && 'Game finshed'}</div>        
-        <Question 
-          options={question.breeds}
-          correctId={question.correctId}
-          onError={(message) => this.setState({error: message})}
-          onAnswer={this.answer}
-          key={currentQuestion}
-        /> 
-        {
-          isAnswered
-            ? isLastQuestion
-              ? <Button onClick={this.createGame} primary>New Game</Button>
-              : <Button onClick={this.nextQuestion} primary>Next Question</Button>
-            : null
-        }
+        <StatusBar>
+          <GameStatus 
+            currentQuestion={currentQuestion + 1}
+            questionNumber={QUESTION_NUMBER}
+            answers={answers}
+          />
+          {
+            isAnswered && !isLastQuestion &&
+              <Button 
+                onClick={this.nextQuestion} 
+                primary
+              >
+                Next Question
+              </Button>
+
+          }
+        </StatusBar>
+        <Centered>
+          <Question 
+            options={question.breeds}
+            correctId={question.correctId}
+            onError={(message) => this.setState({error: message})}
+            onAnswer={this.answer}
+            key={currentQuestion}
+          /> 
+          </Centered>
       </Container>
     )
   }

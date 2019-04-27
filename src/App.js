@@ -13,7 +13,6 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: auto;
 `;
 const Title = styled.h1``;
 

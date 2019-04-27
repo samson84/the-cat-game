@@ -23,11 +23,6 @@ const StatusContainer = styled.div`
   align-items: center;
 `
 
-const CounterContainer = styled.div`
-  display: flex;
-  align-items: center;
-`
-
 export default class Question extends Component {
   constructor(props) {
     super(props);
@@ -86,17 +81,16 @@ export default class Question extends Component {
       <Container>
         <StatusContainer>
           <QuestionStatus message={result} isSuccess={isCorrect} />
-          <CounterContainer>
           {
-            !isAnswered && [
-              'Seconds left:', 
+            !isAnswered && 
+            <span>
+                Time left:
                 <Counter
                   timeMs={TIME_TO_ANSWER_MS} 
                   onFinished={() => this.answer(ANSWER_TIMEOUT)}
                 />
-            ]
+            </span>            
           }
-          </CounterContainer>
         </StatusContainer>
         <CatImages images={images} />
         <AnswerButton 
