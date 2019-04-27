@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
+
 import {getImagesForBreed, AppError} from '../services/catApi';
 import Counter from './Counter';
 import Button from './lib/Button';
 import Loading from './lib/Loading';
+import CatImages from './CatImages';
+import AnswerButton from './AnswerButtons';
 
 const TIME_TO_ANSWER_MS = 5000;
 const ANSWER_TIMEOUT = -1;
@@ -31,11 +34,12 @@ export default class Question extends Component {
         images
       })      
     } catch (error) {
+      this.setState({isLoading: false})  
       if(!(error instanceof AppError)) {
         throw error  
-      }      
+      }
       onError(error.message)
-    }    
+    }
   }
   answer(answerId) {
     const {onAnswer, correctId} = this.props;
@@ -70,29 +74,17 @@ export default class Question extends Component {
             } secs.
           </div>
         }
-        <div>
-          {images.map(image => <img src={image} alt='A cat' height={300} />)}
-        </div>
-        <div>
-          {options.map((breed) => (
-            <Button 
-              onClick={() => this.answer(breed.id)}
-              disabled={answer !== null}
-              error={answer !== null && answer !== correctId && answer === breed.id}
-              success={
-                answer !== null && (breed.id === correctId)
-              }
-            >
-              {breed.name}
-            </Button>
-          ))}
-        </div>
+        <CatImages images={images} />
+        <AnswerButton 
+          onAnswer={(userAnswer) => this.answer(userAnswer)}
+          options={options}
+          correctAnswer={correctId}
+          userAnswer={answer}
+        />
         <div>
           <span style={{color: answer === correctId ? 'green' : 'red'}}>{result}</span>
         </div>
       </React.Fragment>
-      
-
     )
   }
 }
