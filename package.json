@@ -3,11 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "dotenv": "^8.0.0",
+    "express": "^4.16.4",
+    "express-rate-limit": "^3.5.1",
+    "got": "^9.6.0",
+    "helmet": "^3.18.0",
     "lodash": "^4.17.11",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8",
+    "react-scripts": "^3.0.1",
     "styled-components": "^4.2.0"
   },
   "scripts": {
@@ -15,6 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "serve": "node server.js",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },
@@ -28,11 +34,12 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@storybook/react": "^5.0.10",
-    "@storybook/addon-actions": "^5.0.10",
+    "@babel/core": "^7.4.4",
+    "@storybook/addon-actions": "^5.0.11",
     "@storybook/addon-links": "^5.0.10",
     "@storybook/addons": "^5.0.10",
-    "@babel/core": "^7.4.4",
+    "@storybook/react": "^5.0.11",
     "babel-loader": "^8.0.5"
-  }
+  },
+  "proxy": "http://localhost:5002"
 }

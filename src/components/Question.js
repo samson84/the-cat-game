@@ -8,7 +8,7 @@ import CatImages from './CatImages';
 import AnswerButton from './AnswerButtons';
 import QuestionStatus from './QuestionStatus';
 
-const TIME_TO_ANSWER_MS = 5000;
+const TIME_TO_ANSWER_MS = 500000;
 const ANSWER_TIMEOUT = -1;
 
 const Container = styled.div`
@@ -47,11 +47,11 @@ export default class Question extends Component {
         images
       })      
     } catch (error) {
-      this.setState({isLoading: false})  
+      this.setState({isLoading: false})
+      onError(error.message)
       if(!(error instanceof AppError)) {
         throw error  
-      }
-      onError(error.message)
+      }      
     }
   }
   answer(answerId) {

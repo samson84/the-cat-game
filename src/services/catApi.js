@@ -1,7 +1,6 @@
 import {breed} from '../utils/models';
 
-const API_KEY = process.env.REACT_APP_CAT_API_KEY;
-const BASE_URL = 'https://api.thecatapi.com/v1'
+const BASE_URL = '/cat-api'
 
 export class AppError extends Error {
   constructor(message) {
@@ -13,16 +12,21 @@ export class AppError extends Error {
 async function request(url) {
   let response;
   try {
-    response = await fetch(url, {
-      headers: {
-        'x-api-key': API_KEY
-      },
-    });
+    response = await fetch(url);
   } catch (error) {
     throw new AppError(`Network Error: ${error.message}`);
   }
+  
   if (!response.ok) {
-    throw new AppError(`API Error: ${response.status} ${response.statusText}`);
+    let error;
+    try {
+      error = await response.json();      
+    } catch (e) {
+      throw new AppError(`API Error: test ${response.status} ${response.statusText}`);
+    }    
+    const message = error.error || `${response.status} ${response.statusText}`
+    throw new AppError(`API Error: ${message}`);
+
   }
   try {
     return { payload: await response.json() }
@@ -53,6 +57,6 @@ export async function getImagesForBreed(breedId) {
   try {
     return await Promise.all(imageRequests);
   } catch (error) {
-    throw new AppError(`Could not load this image: ${error}`)
+    throw new AppError(`Could not load this image: ${error.message || error}`)
   }
 }

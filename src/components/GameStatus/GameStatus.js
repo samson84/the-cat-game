@@ -29,8 +29,9 @@ function GameStatus({currentQuestion, questionNumber, answers}) {
       <Header>Questions {currentQuestion} of {questionNumber}</Header>
       <AnswerIndicator>
         {
-          answers.map(answer => 
-            <CatIcon 
+          answers.map((answer, index) => 
+            <CatIcon
+              key={index}
               src={answer ? happyCat : sadCat} 
               alt={answer ? 'Correct answer' : 'Wrong answer'} 
             />

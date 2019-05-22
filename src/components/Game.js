@@ -8,9 +8,9 @@ import {getAllBreeds, AppError} from '../services/catApi';
 import {getRandomElements, range, shuffle} from '../utils/random';
 import Question from './Question';
 import Button from './lib/Button';
-import Opening from './Opening';
+import Opening from './Opening/Opening';
 import Loading from './lib/Loading';
-import GameStatus from './GameStatus';
+import GameStatus from './GameStatus/GameStatus';
 
 const QUESTION_NUMBER = 5;
 
@@ -47,11 +47,12 @@ export default class Game extends Component {
   async componentDidMount() {
     const { onError } = this.props
 
-    this.setState({isLoading: true})
+    this.setState({isLoading: true, hasError: false})
     try {
       const breeds = await getAllBreeds()
       this.setState({breeds, isLoading: false})
-    } catch (error) {      
+    } catch (error) {   
+      this.setState({isLoading: false, hasError: true})   
       if(!(error instanceof AppError)) {
         throw error  
       }
@@ -89,10 +90,16 @@ export default class Game extends Component {
       currentQuestion, 
       questions,
       answers,
+      hasError
     } = this.state;
+    const { onError } = this.props;
 
     if (isLoading) {
       return (<Loading title='Loading game...' />)
+    }
+
+    if (hasError) {
+      return null;
     }
 
     if (currentQuestion === null) {
@@ -141,7 +148,7 @@ export default class Game extends Component {
           <Question 
             options={question.breeds}
             correctId={question.correctId}
-            onError={(message) => this.setState({error: message})}
+            onError={(message) => onError(message)}
             onAnswer={this.answer}
             key={currentQuestion}
           /> 

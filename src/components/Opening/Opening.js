@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types'
 
 import cat from './cat_contour.png'
-import Button from './lib/Button'
+import Button from '../lib/Button'
 
 const Container = styled.div`
   display: flex;

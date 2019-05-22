@@ -24,11 +24,14 @@ class App extends Component {
   render() {
     const { error } = this.state
 
+    if(error) {
+      return (<Alert>{error}</Alert>)
+    }
+
     return (
       <Container>
         <Header>
           <Title>The cat quiz</Title>
-          {error && <Alert>{error}</Alert>}
         </Header>
         <Content>
           <Game onError={(message) => this.setState({error: message})}/>
