@@ -8,7 +8,7 @@ import CatImages from './CatImages';
 import AnswerButton from './AnswerButtons';
 import QuestionStatus from './QuestionStatus';
 
-const TIME_TO_ANSWER_MS = 500000;
+const TIME_TO_ANSWER_MS = 10000;
 const ANSWER_TIMEOUT = -1;
 
 const Container = styled.div`

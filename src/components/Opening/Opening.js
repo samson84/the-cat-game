@@ -42,7 +42,7 @@ export default function Opening({onStart}) {
             Quess which breed is on the images. 
           </P> 
           <P>
-            You have 5 secs. One game has
+            You have 10 secs. One game has
             5 questions.
           </P>
         </Intro>
