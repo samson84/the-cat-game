@@ -4,7 +4,8 @@ import styled from 'styled-components';
 
 import Button from './lib/Button'
 
-const Container = styled.div``;
+const Container = styled.div`
+`;
 
 function AnswerButtons({onAnswer, options, userAnswer, correctAnswer}) {
   const isAnswered = userAnswer !== null;

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components';
 
 import loadingCat from './cat-loading.gif';
+import media from '../media';
 
 const Container = styled.div`
   display: flex;
@@ -12,8 +13,9 @@ const Container = styled.div`
 `
 
 const LoadingImage = styled.img`
-  height: 300px;
+  height: 300px;  
   margin: auto;
+  ${media.mobile`height: 200px;`}
 `
 
 const LoadingTitle = styled.div`
@@ -23,7 +25,7 @@ const LoadingTitle = styled.div`
 
 export default function Loading({title}) {
   return (
-    <Container>      
+    <Container>     
         <LoadingImage src={loadingCat} alt='Loading placeholder.'/>
         <LoadingTitle>{title}</LoadingTitle>
     </Container>

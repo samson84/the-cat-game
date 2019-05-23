@@ -3,18 +3,22 @@ import styled from 'styled-components';
 
 import Game from './components/Game';
 import Alert from './components/lib/Alert';
+import {Title} from './components/lib/Title';
+import media from './components/media';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column; 
 `;
-const Header = styled.div``;
+const Header = styled.div`
+  margin-left: 10em;
+  ${media.mobile`margin-left: 0em;`}
+`;
 const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
 `;
-const Title = styled.h1``;
 
 class App extends Component {
   constructor(props) {
@@ -31,7 +35,7 @@ class App extends Component {
     return (
       <Container>
         <Header>
-          <Title>The cat quiz</Title>
+          <Title>The Cat Quiz</Title>
         </Header>
         <Content>
           <Game onError={(message) => this.setState({error: message})}/>

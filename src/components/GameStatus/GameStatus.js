@@ -4,16 +4,17 @@ import styled from 'styled-components';
 
 import happyCat from './cat-face.png';
 import sadCat from './crying-cat-face.png'
+import {SubTitle} from '../lib/Title';
+import media from '../media';
 
 const CatIcon = styled.img`
   width: 32px;
   height: 32px;
 `;
 
-const AnswerIndicator = styled.div`
-  height: 32px;
-`
-const Header = styled.h2`
+const AnswerIndicator = styled.div``
+
+const Header = styled.div`
   margin-right: 1em;
 `
 
@@ -21,15 +22,23 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  ${media.mobile`
+    flex-direction: column;
+    align-items: flex-start;
+  `}
 `;
 
-function GameStatus({currentQuestion, questionNumber, answers}) {
+function GameStatus({currentQuestion, questionNumber, answers, showAnswers}) {
   return (
     <Container>
-      <Header>Questions {currentQuestion} of {questionNumber}</Header>
+      <Header>
+        <SubTitle>
+          Questions {currentQuestion} of {questionNumber}
+        </SubTitle>        
+      </Header>
       <AnswerIndicator>
         {
-          answers.map((answer, index) => 
+          showAnswers && answers.map((answer, index) => 
             <CatIcon
               key={index}
               src={answer ? happyCat : sadCat} 
@@ -45,7 +54,8 @@ function GameStatus({currentQuestion, questionNumber, answers}) {
 GameStatus.propTypes = {
   currentQuestion: PropTypes.number.isRequired,
   questionNumber: PropTypes.number.isRequired,
-  answers: PropTypes.arrayOf(PropTypes.number)
+  answers: PropTypes.arrayOf(PropTypes.number),
+  showAnswers: PropTypes.bool
 }
 
 GameStatus.defaultProps = {

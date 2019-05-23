@@ -23,6 +23,12 @@ const StatusContainer = styled.div`
   align-items: center;
 `
 
+const StickyContainer = styled.div`
+  position: sticky;
+  top: 0px;
+  background-color: white;
+`;
+
 export default class Question extends Component {
   constructor(props) {
     super(props);
@@ -79,25 +85,27 @@ export default class Question extends Component {
     
     return (
       <Container>
-        <StatusContainer>
-          <QuestionStatus message={result} isSuccess={isCorrect} />
-          {
-            !isAnswered && 
-            <span>
-                Time left:
-                <Counter
-                  timeMs={TIME_TO_ANSWER_MS} 
-                  onFinished={() => this.answer(ANSWER_TIMEOUT)}
-                />
-            </span>            
-          }
-        </StatusContainer>
-        <AnswerButton 
-            onAnswer={(userAnswer) => this.answer(userAnswer)}
-            options={options}
-            correctAnswer={correctId}
-            userAnswer={answer}
-         />
+        <StickyContainer>
+          <StatusContainer>
+            <QuestionStatus message={result} isSuccess={isCorrect} />
+            {
+              !isAnswered && 
+              <span>
+                  Time left:
+                  <Counter
+                    timeMs={TIME_TO_ANSWER_MS} 
+                    onFinished={() => this.answer(ANSWER_TIMEOUT)}
+                  />
+              </span>            
+            }
+          </StatusContainer>
+          <AnswerButton 
+              onAnswer={(userAnswer) => this.answer(userAnswer)}
+              options={options}
+              correctAnswer={correctId}
+              userAnswer={answer}
+          />
+          </StickyContainer>
         <CatImages images={images} />
       </Container>
     )

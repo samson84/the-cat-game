@@ -11,12 +11,13 @@ import Button from './lib/Button';
 import Opening from './Opening/Opening';
 import Loading from './lib/Loading';
 import GameStatus from './GameStatus/GameStatus';
+import media from '../components/media';
 
 const QUESTION_NUMBER = 5;
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
 `
 
 const Centered = styled.div`
@@ -27,6 +28,10 @@ const StatusBar = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  ${media.mobile`
+    flex-direction: column;
+    align-items: flex-start;
+  `}
 `
 
 export default class Game extends Component {
@@ -37,8 +42,7 @@ export default class Game extends Component {
       questions: [],
       answers: [],
       currentQuestion: null,
-      isLoading: false,
-      isImagesLoading: false,
+      isLoading: false
     }
     this.createGame = this.createGame.bind(this);
     this.nextQuestion = this.nextQuestion.bind(this);
@@ -118,33 +122,34 @@ export default class Game extends Component {
 
     return ( 
       <Container>
-        <StatusBar>
-          <GameStatus 
-            currentQuestion={currentQuestion + 1}
-            questionNumber={QUESTION_NUMBER}
-            answers={answers}
-          />
-          {
-            isAnswered && !isLastQuestion &&
-              <Button 
-                onClick={this.nextQuestion} 
-                primary
-              >
-                Next Question
-              </Button>
-          }
-          {
-            isAnswered && isLastQuestion &&
-              <Button 
-                onClick={this.createGame}
-                primary
-              >
-                New Game
-              </Button>
-          }
-          {isAnswered && isLastQuestion && <span>The game finished.</span>}
-        </StatusBar>
         <Centered>
+          <StatusBar>
+            <GameStatus 
+              currentQuestion={currentQuestion + 1}
+              questionNumber={QUESTION_NUMBER}
+              answers={answers}
+              showAnswers={isAnswered}
+            />
+            {
+              isAnswered && !isLastQuestion &&
+                <Button 
+                  onClick={this.nextQuestion} 
+                  primary
+                >
+                  Next Question
+                </Button>
+            }
+            {
+              isAnswered && isLastQuestion &&
+                <Button 
+                  onClick={this.createGame}
+                  primary
+                >
+                  New Game
+                </Button>
+            }
+            {isAnswered && isLastQuestion && <span>The game finished.</span>}
+          </StatusBar>
           <Question 
             options={question.breeds}
             correctId={question.correctId}
@@ -152,7 +157,7 @@ export default class Game extends Component {
             onAnswer={this.answer}
             key={currentQuestion}
           /> 
-          </Centered>
+        </Centered>
       </Container>
     )
   }
