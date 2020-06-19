@@ -2,7 +2,7 @@
 
 ## About
 
-The Cat Quiz is a small side project, using (The Cat API)[https://thecatapi.com/] to 
+The Cat Quiz is a small side project, using [The Cat API](https://thecatapi.com/) to 
 implement a game. The game is about guessing the cats breeds based on images.
 It is fully mobile compatible.
 
