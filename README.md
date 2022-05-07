@@ -2,16 +2,16 @@
 
 ## About
 
-The Cat Quiz is a small side project, using (The Cat API)[https://thecatapi.com/] to 
+The Cat Quiz is a small side project, using [The Cat API](https://thecatapi.com/) to 
 implement a game. The game is about guessing the cats breeds based on images.
 It is fully mobile compatible.
 
-(Demo)[https://the-cat-quiz.herokuapp.com]
+[Demo](https://the-cat-quiz.herokuapp.com)
 
 ## Up and running
 
 - Install nodejs
-- Register an API key on (https://thecatapi.com/)[https://thecatapi.com/]
+- Register an API key on [https://thecatapi.com/](https://thecatapi.com/)
 - Rename `.env.example` to `.env`, and fill the values.
 - `npm run build` to build the app
 - `npm run serve` to start a local server
