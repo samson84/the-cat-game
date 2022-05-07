@@ -27,10 +27,16 @@ It is fully mobile compatible.
 
 ## Roadmap
 
-- [x] better look on large screens
+- [ ] better look on large screens
+- [ ] better look on medium size screens
 - [x] correct look on mobile screens
 - [ ] add pop-up messages or toaster (wrong / correct answers, error messages)
 - [ ] add animations
 - [ ] scroll to top (on mobile) when a question is answered
 - [ ] add game finish popup/toaster, highlight the scores
 - [ ] add some info about the breed when the question is answered
+- [ ] add back to opening screen / end game button
+- [ ] track multiple game results
+- [ ] save the game results to local storage
+- [ ] add a guess in a row mode
+- [ ] add a cat catalouge
